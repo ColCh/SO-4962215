@@ -26,7 +26,7 @@ export default class App extends React.Component {
    console.log('started to take video');
    this.camera.capture({
      audio: true,
-     mode: Camera.constants.CaptureMode.still,
+     mode: Camera.constants.CaptureMode.video,
      target: Camera.constants.CaptureTarget.disk
    }).then((data) => {
      this.setState({ path: data.path });
@@ -46,13 +46,13 @@ export default class App extends React.Component {
          ref={(cam) => {
            this.camera = cam;
          }}
-         style={styles.preview}
+         style={{ flex: 1, borderWidth: 1, borderColor: 'red', }}
          aspect={Camera.constants.Aspect.fill}
          captureTarget={Camera.constants.CaptureTarget.disk}
-         captureMode={Camera.constants.CaptureMode.still}
+         captureMode={Camera.constants.CaptureMode.video}
        >
          <TouchableHighlight
-           style={styles.capture}
+           style={{ borderWidth: 1, borderColor: 'blue', flex: 1 }}
            onPressIn={this.takeVideo.bind(this)}
            onPressOut={this.stopVideo.bind(this)}
            underlayColor="rgba(255, 255, 255, 0.5)"
@@ -69,40 +69,3 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  preview: {
-    flex: 1
-  },
-  controlPanel: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'space-between'
-  },
-  topButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 10,
-    marginTop: 25
-  },
-  xIcon: {
-    height: 25,
-    width: 25
-  },
-  cameraIcon: {
-    height: 35,
-    width: 35
-  },
-  recordButtonContainer: {
-    marginBottom: 10
-  },
-  recordButton: {
-    height: 60,
-    width: 60,
-    borderRadius: 30
-  }
-});
